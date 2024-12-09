@@ -1,0 +1,19 @@
+exclude: ".html|csv$"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.10
+
+    files: terraform/
+    hooks:
+      - id: terraform-fmt
+        name: terraform fmt
+        description: runs terraform fmt
+        entry: terraform fmt ./terraform/develop
+        language: system
+        pass_filenames: false

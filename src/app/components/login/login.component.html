@@ -1,0 +1,42 @@
+<header>
+  <a href="#" class="eclerxLogo"><img src="assets/eClerx-Digital-Logo-New.png" alt=""></a>
+</header>
+<section class="container">
+  <div class="loginForm">
+    <h1>Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="pnl"><i class="fa fa-user-o" aria-hidden="true"></i>
+        
+        <input type="text" placeholder="" formControlName="user_id">
+        <div *ngIf="user_id.invalid && user_id.touched">
+          <small *ngIf="user_id.errors ?.required" class="text-dangerUser">
+            Please enter valid username</small>
+        </div>
+        
+
+      </div>
+      <div class="pnl">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        
+        <input [class.is-invalid]="password.invalid && password.touched" [type]="show ? 'text' : 'password'"  id="password-field"
+          formControlName="password" >
+        <i id="pass-status" class="fa fa-eye" aria-hidden="true" (click)='viewPassword()'></i>
+        <div *ngIf="password.invalid && password.touched">
+          <small *ngIf="password.errors ?.required" class="text-dangerPass">
+            Please enter the password</small>
+
+        </div>
+      </div>
+      
+      
+      
+      
+      <div class="pnl"><input [disabled]="loginForm.invalid" type="submit" placeholder=""></div>
+      
+    </form>
+  </div>
+</section>
+
+<section class="footer">
+  <img src="assets/footer.png" alt="" />
+</section>

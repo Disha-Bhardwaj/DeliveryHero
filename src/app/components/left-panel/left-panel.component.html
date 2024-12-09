@@ -1,0 +1,32 @@
+<!-- Code For left navigation part -->
+<div class="leftPanel">
+  <div class="menu" onclick="menuLinks()">
+    <ul>
+      <!-- code to navigate other pages -->
+      <li>
+        <a routerLinkActive="active"
+          routerLink="/businessSummary/business"
+          routerLinkActiveOptions="exact:true"
+          class="businessIcon"
+        ></a>
+        <label
+          ><a routerLink="/businessSummary/business" routerLinkActive="active"
+          routerLinkActiveOptions="exact:true" routerLinkActive="active"
+          routerLinkActiveOptions="exact:true">Business Summary</a></label
+        >
+      </li>
+      <li>
+        <a routerLink="/scenario/scenario" routerLinkActive="active" class="scenarioIcon" ></a>
+        <label><a routerLink="/scenario/scenario" routerLinkActive="active">Scenario Planner</a></label>
+      </li>
+      <li>
+        <a routerLink="/optimizer/optimizer" routerLinkActive="active" class="optimizerIcon"></a>
+        <label><a routerLink="/optimizer/optimizer" routerLinkActive="active">Optimizer Setup</a></label>
+      </li>
+      <li>
+        <a (click)="logout()" class="settingIcon"></a>
+        <label (click)="logout()"><a (click)="logout()">Logout</a></label>
+      </li>
+    </ul>
+  </div>
+</div>

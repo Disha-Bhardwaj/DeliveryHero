@@ -1,0 +1,582 @@
+<section class="contentWrapper">
+  <div class="contentArea">
+    <!-- code for search filter (submit button) -->
+    <h2 class="businessH2">Business Summary</h2>
+    <div class="download" style="margin-left: 36% !important;"> 
+      <label style="margin-right: 11%;margin-top: 2%;
+      color: #5c5c5c;
+      font-weight: bold;
+      white-space: nowrap;
+      font-size: 16px;
+      padding-left: 18px;">Business KPI</label>
+      <select  style="background: #ffffff 0% 0% no-repeat padding-box;
+      height: 35px;
+      box-sizing: border-box;
+      border: 1px solid #a3a3a3;
+      border-radius: 8px;
+      padding: 5px;
+      outline: none;
+      font-size: 16px;
+      color: #5c5c5c;" #kpiValue (change)="selectKPI(kpiValue.value)">
+      <option *ngFor="let KPI of KPIlist" value="{{KPI}}">{{KPI}}</option>
+      </select>
+    </div>
+    <!-- <div class="download">
+      <a
+        download="Solution_Overview.pdf"
+        href="assets/docs/Solution_Overview.pdf"
+        style="color: #4a88d7"
+        >Solution Overview
+        <img src="assets/Icon-Download.png" alt="downloadIcon" class="point"
+      /></a>
+    </div>-->
+    <!-- filters form -->
+    <form [formGroup]="businessSummaryForm" class="form">
+      <div class="selecctSection">
+        <div class="selectCol">
+          <label>Country</label>
+          <select
+          formControlName="country"
+          #countrySelect
+            (change)="filtersCountry(countrySelect.value, 'country')"
+            class="point"
+        >
+        <option *ngFor="let country of countryList" value="{{country}}" ><span *ngIf="!country.includes('-')">{{ country }}</span>
+          <span *ngIf="country.includes('-')">{{ country.split("-")[1] }}</span></option>
+        </select>
+        </div>
+        <div class="selectCol">
+          <label>City</label>
+         
+          <select
+            formControlName="city"
+            #citySelect
+            (change)="filtersCountry(citySelect.value, 'city')"
+            class="point"
+          >
+          <option *ngFor="let city of cityList" value="{{ city }}" >
+            <span *ngIf="!city.includes('-')">{{ city }}</span>
+            <span *ngIf="city.includes('-')">{{ city.split("-")[1] }}</span>
+            
+          </option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Category</label>
+          <select
+            formControlName="category"
+          >
+          <option  *ngFor="let category of categoryList" value="{{category}}" >{{category}}</option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Year</label>
+          <select
+            formControlName="year"
+            class="point"
+            #year
+            (change)="filtersCountry(year.value, 'year')"
+          >
+            <option *ngFor="let year of yearList" value="{{ year }}">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Quarter</label>
+          <select
+            formControlName="quarter"
+            class="point"
+            #mySelectquar
+            (change)="onQuarterSelect(mySelectquar.value)"
+          >
+            <option value="all">All</option>
+            <option
+              *ngFor="let quarter of quarterList.sort()"
+              value="{{ quarter }}"
+            >
+              {{ quarter.toUpperCase() }}
+            </option>
+          </select>
+        </div>
+
+        <div class="selectCol">
+          <label>Month</label>
+          <select formControlName="month" *ngIf="q0" class="point">
+            <option value="0">All</option>
+          </select>
+          <select formControlName="month" *ngIf="q1" class="point">
+            <option value="0">All</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+          </select>
+          <select formControlName="month" *ngIf="q2" class="point">
+            <option value="0">All</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+          </select>
+          <select formControlName="month" *ngIf="q3" class="point">
+            <option value="0">All</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+          </select>
+          <select formControlName="month" *ngIf="q4" class="point">
+            <option value="0">All</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+
+        <div class="selectCol">
+          <label>&nbsp;</label>
+          <button class="submitBtn point" (click)="submitbusinessSummaryForm()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- code for top 5 boxes -->
+    <div class="summyPanels">
+      <div class="sumryCol sumryCol1">
+        <div class="sumrColcontent">
+          <div class="textCol">
+            <h6>Total Marketing Spend</h6>
+            <span class="currency"
+              >AED {{ totalMarketingSpendValue | thousandSuff: 1 }}</span
+            >
+          </div>
+          <!-- icon -->
+          <div class="iconCol iconCol1">
+            <img src="assets/Icon-MarketingSpend.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="sumryCol sumryCol2">
+        <div class="sumrColcontent">
+          <div class="textCol">
+            <h6>Total Spend</h6>
+            <span class="currency"
+              >AED {{ totalSpendValue | thousandSuff: 1 }}</span
+            >
+          </div>
+          <!-- icon -->
+          <div class="iconCol iconCol2">
+            <img src="assets/Icon-MarketingSpend.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="sumryCol sumryCol3">
+        <div class="sumrColcontent">
+          <div class="textCol">
+            <h6>Total Incentives</h6>
+            <span class="currency"
+              >AED {{ totalIncentivesValue | thousandSuff: 1 }}</span
+            >
+          </div>
+          <!-- icon -->
+          <div class="iconCol iconCol3">
+            <img src="assets/Icon-Incentives.png" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="sumryCol sumryCol4">
+        <div class="sumrColcontent">
+          <div class="textCol">
+            <h6>{{kpiValueForSummary}}</h6>
+            <span class="currency">{{ noOfOrderValue | thousandSuff: 1 }}</span>
+          </div>
+          <!-- icon -->
+          <div class="iconCol iconCol4">
+            <img src="assets/Icon-Orders.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- code for spend distribution block -->
+    <div class="myContainer topContainer">
+      <div id="topTabs" class="efffectiveTabs">
+        <div class="colorLabel">
+          <span>Base</span>
+          <span id="optiText">Optimal</span>
+          <span id="optiAquiText">Optimal</span>
+        </div>
+        <!-- code for effectiveness and efficiency buttons  -->
+        <ul>
+          <span
+            >Spend Distribution
+            <!-- <i
+              class="fa fa-info-circle internal1"
+              data-toggle="tooltip"
+              title="{{ getTextSpendInfo() }}"
+              data-placement="top"
+            ></i> -->
+          </span>
+
+          <li
+            class="point selectedTab"
+            onclick="efficiency()"
+            id="efficiency"
+            (click)="distributionSelectFun('efficiency')"
+            data-toggle="tooltip"
+            title="Cost Per incremental Orders / Acquisitions"
+          >
+            <a>Efficiency</a>
+          </li>
+
+          <li
+            class="point"
+            onclick="effectiveness()"
+            id="effectiveness"
+            (click)="distributionSelectFun('effective')"
+            data-toggle="tooltip"
+            title="Incremental Orders / Acquisitions attributed to channels"
+          >
+            <a>Effectiveness</a>
+          </li>
+        </ul>
+        <!-- spend dis bucket -->
+        <div id="efficiency" class="spendColumns">
+          <!-- code for bucket graphs -->
+          <aside class="doubleCol">
+            <div class="heading">Bucket <span>(All values in AED)</span></div>
+            <div class="infoArea">
+              <div class="spendCol" id="spendSpendCol">
+                <h6 id="spendspend">Spend</h6>
+                <div class="graph">
+                  <div
+                    id="spendDistributionspend"
+                    style="width: 100%; height: 350px;"
+                  ></div>
+                </div>
+              </div>
+              <div class="spendCol">
+                <!-- code for channels change -->
+                <div class="graph">
+                  <h6><strong>Total</strong></h6>
+                  <a
+                    onclick="displayPerformaceMarket()"
+                    (click)="channelSpecificClick('Social/Digital')"
+                    class="point graphchange"
+                    id="forPerformaceGraph"
+                    >Social/Digital</a
+                  >
+                  <a
+                    onclick="displayIncentives()"
+                    (click)="channelSpecificClick('Offers/Promotions')"
+                    class="point"
+                    id="forIncentiveGraph"
+                    >Offers/Promotions</a
+                  >
+                  <a
+                    onclick="displayTopOfMind()"
+                    (click)="channelSpecificClick('Mind Metrics')"
+                    class="point"
+                    id="forTopMindGraph"
+                    >Mind Metrics</a
+                  >
+                </div>
+              </div>
+              <div class="spendCol" id="spendSpendCol">
+                <h6 id="spendspend">{{kpiValueForDistribution}}</h6>
+                <div class="graph">
+                  <div
+                    id="spendDistributionroi"
+                    style="width: 100%; height: 350px;"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <!-- code for performance marketing graphs-->
+          <aside class="doubleCol">
+            <div class="heading" id="performanceDisplay">
+              Social/Digital
+              <span
+                >(All values in AED)
+                <i
+                  class="fa fa-info-circle internal1"
+                  data-toggle="tooltip"
+                  title="{{ getTextChannels() }}"
+                  data-placement="top"
+                ></i
+              ></span>
+            </div>
+            <div class="heading" id="topOfMindDisplay">
+              Mind Metrics
+              <span
+                >(All values in AED)
+                <i
+                  class="fa fa-info-circle internal1"
+                  data-toggle="tooltip"
+                  title="{{ getTextChannels() }}"
+                  data-placement="top"
+                ></i
+              ></span>
+            </div>
+            <div class="heading" id="incentivesDisplay">
+              Offers/Promotions
+              <span
+                >(All values in AED)
+                <i
+                  class="fa fa-info-circle internal1"
+                  data-toggle="tooltip"
+                  title="{{ getTextChannels() }}"
+                  data-placement="top"
+                ></i
+              ></span>
+            </div>
+            <!-- channels graph -->
+            <div class="infoArea">
+              <div class="spendCol newCol" id="perSpendCol">
+                <h6 id="spendper">Spend</h6>
+                <!-- code for performance marketing graph spend-->
+                <div class="graph">
+                  <div
+                    id="performanceMarketingspend"
+                    style="width: 100%; height: 750px"
+                  ></div>
+                </div>
+              </div>
+              <div class="spendCol newCol">
+                <!-- code for dynamic channels display -->
+                <div
+                  class="graph"
+                  *ngFor="let channel of disChannelArrayMap.slice().reverse()"
+                >
+                  <a>{{ channel }}</a>
+                </div>
+              </div>
+              <div class="spendCol newCol">
+                <!--change the text according efficency or effectiveness-->
+                <h6>{{kpiValueForDistribution}}</h6>
+                <div class="graph">
+                  <div
+                    id="performanceMarketingorder"
+                    style="width: 100%; height: 750px"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    
+    <div class="myContainer">
+      <article class="fullCol">
+        <div id="tabs">
+          <!-- code for qoq and bucket attribution tab -->
+          <ul>
+            <li>
+              <a
+                onclick="QoQDisplay()"
+                (click)="QoqClick()"
+                class="point active1"
+                id="qoq_yoy"
+                >QoQ / YoY Comparison</a
+              >
+            </li>
+          </ul>
+          <div id="tabs-1">
+            <div id="tabs2">
+              <!-- code for qoq and yoy tab -->
+              <ul>
+                <li id="qoqLi">
+                  <a
+                    id="QoQTab"
+                    class="point selectedTab"
+                    onclick="QoQCLick()"
+                    (click)="qoqYoySelect('qoq')"
+                    >QoQ / MoM</a
+                  >
+                </li>
+                <li id="yoyLi">
+                  <a
+                    id="YoYTab"
+                    class="point"
+                    onclick="YoYCLick()"
+                    (click)="qoqYoySelect('yoy')"
+                    >YoY</a
+                  >
+                </li>
+              </ul>
+              <div id="QoQ">
+                <div id="tabs3">
+                  <!-- code for grouped and channel specific tab -->
+                  <ul>
+                    <li>
+                      <a
+                        onclick="grouped()"
+                        id="groupTab"
+                        class="point selectedTab"
+                        (click)="qoqGroupClick()"
+                        >Grouped</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        onclick="channelSpecific()"
+                        (click)="qoqChannelClick()"
+                        id="channelTab"
+                        class="point"
+                        >Channel Specific</a
+                      >
+                    </li>
+                  </ul>
+                  <div class="firstTabsContent">
+                    <!-- code for dropdown when channel tab is selected -->
+                    <div class="channelSelect" id="dropdownSpecific">
+                      <select
+                        #mySelect
+                        (change)="onOptionsSelected(mySelect.value)"
+                      >
+                        <option value="Social/Digital">
+                          Social/Digital
+                        </option>
+                        <option value="Mind Metrics">Mind Metrics</option>
+                        <option value="Offers/Promotions">Offers/Promotions</option>
+                      </select>
+                    </div>
+                    <div id="grouped" class="columnSections">
+                      <div class="groupColumn" id="groupedSpend">
+                        <h6>Spend</h6>
+                        <!-- code for comparision spend graph -->
+                        <div
+                          id="QoQYoYComparisonspend"
+                          style="width: 162%; height: 400px"
+                        ></div>
+                      </div>
+                      <div class="groupColumn" id="groupedOrder">
+                        <h6>{{kpiValueSelected}}</h6>
+                        <!-- code for comparision order graph -->
+                        <div
+                          id="QoQYoYComparisonorder"
+                          style="width: 162%; height: 400px"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="YoY"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="myContainer">
+      <article class="fullCol">
+        <div id="tabs">
+          <!-- code for qoq and bucket attribution tab -->
+          <ul>
+            <li>
+              <a
+                onclick="weeklyTrendDisplay()"
+                (click)="bucketAttributeClick()"
+                class="point"
+                >Bucket Attribution</a
+              >
+            </li>
+          </ul>
+
+          <div id="tabs-3">
+            <!-- code for bucket attribution tabs graph -->
+            <div id="tabsbucket">
+              <!-- code for order and aquisition tab -->
+              <ul>
+                <li>
+                  <a
+                    id="bucketGroupedID"
+                    onclick="bucketgrouped()"
+                    (click)="bucketBucketClick()"
+                    class="point selectedTab"
+                    >Bucket</a
+                  >
+                </li>
+                <li>
+                  <a
+                    id="bucketChannelID"
+                    onclick="bucketChannel()"
+                    (click)="channelBucketClick()"
+                    class="point"
+                    >Channel Specific</a
+                  >
+                </li>
+              </ul>
+
+              <!-- code for bucket tab selected labels -->
+              <div id="OrderTab">
+                <div class="colorLabel" id="colorLabel">
+                  <span>Social/Digital</span>
+                  <span>Mind Metrics</span>
+                  <span>Offers/Promotions</span>
+                </div>
+
+                <div id="tabs3Bucket">
+
+                  <div class="firstTabsContent" id="buckgrah">
+                    <!-- code for attribution order graph -->
+                    <div
+                      id="weeklyTrendorder"
+                      style="width: 100%; height: 300px"
+                    ></div>
+                    <!-- code for attribution spend graph -->
+                    <div
+                      id="weeklyTrendspend"
+                      style="width: 100%; height: 300px"
+                    ></div>
+
+                    <div id="channelbucTab" class="columnSections"></div>
+                  </div>
+                  <div class="firstTabsContent" id="buckgrahChannel">
+                    <div class="channelSelect bucketChanl">
+                      <!-- code for attribution channels dropdown -->
+                      <select
+                        #mySelectnew
+                        (change)="onOptionsSelectedBucket(mySelectnew.value)"
+                      >
+                        <option value="Social/Digital">
+                          Social/Digital
+                        </option>
+                        <option value="Mind Metrics">Mind Metrics</option>
+                        <option value="Offers/Promotions">Offers/Promotions</option>
+                      </select>
+                    </div>
+                    <!-- code for attribution order graph when channel is selected -->
+                    <div
+                      id="weeklyTrendorderchannel"
+                      style="width: 100%; height: 300px"
+                    ></div>
+                    <!-- code for attribution spend graph when channel is selected-->
+                    <div
+                      id="weeklyTrendspendChannel"
+                      style="width: 100%; height: 300px"
+                    ></div>
+
+                    <div id="channelbucTab" class="columnSections"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="AcquiTab"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- code for footer -->
+<footer class="footer">
+  Copyright © 2020, Market Mix Model. All rights reserved
+  <a class="footerLogo"
+    ><img src="assets/eClerx-Digital-Logo-New.png" alt="Logo"
+  /></a>
+</footer>

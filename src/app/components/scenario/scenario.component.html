@@ -1,0 +1,737 @@
+<section class="contentWrapper">
+  <div class="contentArea">
+    <!-- code for search filter (submit button) -->
+    <h2>Scenario Planner</h2>
+    <!-- <div class="download" style="margin-left: 79% !important;margin-top: -2%;"> 
+      <label style="margin-right: 11%;margin-top: 4%;
+      color: #5c5c5c;
+      font-weight: bold;
+      font-size: 16px;
+      padding-left: 18px;">KPI</label>
+      <select style="background: #ffffff 0% 0% no-repeat padding-box;
+      height: 30px;
+      box-sizing: border-box;
+      border: 1px solid #a3a3a3;
+      border-radius: 8px;
+      padding: 5px;
+      outline: none;
+      font-size: 16px;
+      color: #5c5c5c;" #kpiValue (change)="selectKPI(kpiValue.value)">
+      <option *ngFor="let KPI of KPIlist" value="{{KPI}}">{{KPI}}</option>
+      </select>
+    </div> -->
+    <form [formGroup]="scenarioForm" class="form">
+      <div class="selecctSection scenario">
+        <div class="selectCol">
+          <label>Country</label>
+          <select
+          formControlName="country"
+          #countrySelect
+            (change)="filtersCountry(countrySelect.value, 'country')"
+            class="point"
+        >
+        <option *ngFor="let country of countryList" value="{{country}}" ><span *ngIf="!country.includes('-')">{{ country }}</span>
+          <span *ngIf="country.includes('-')">{{ country.split("-")[1] }}</span></option>
+        </select>
+        </div>
+        <div class="selectCol">
+          <label>City</label>
+         
+          <select
+            formControlName="city"
+            #citySelect
+            (change)="filtersCountry(citySelect.value, 'city')"
+            class="point"
+          >
+          <option *ngFor="let city of cityList" value="{{ city }}" >
+            <span *ngIf="!city.includes('-')">{{ city }}</span>
+            <span *ngIf="city.includes('-')">{{ city.split("-")[1] }}</span>
+            
+          </option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Category</label>
+          <select
+            formControlName="category"
+          >
+         <option  *ngFor="let category of categoryList" value="{{category}}" >{{category}}</option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Year</label>
+          <select
+            formControlName="year"
+            class="point"
+            #yearSelect
+            (change)="filtersCountry(yearSelect.value, 'year')"
+          >
+            <option *ngFor="let year of yearList" value="{{ year }}">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Quarter</label>
+          <select
+            formControlName="quarter"
+            class="point"
+            #mySelect
+            (change)="onOptionsSelected(mySelect.value)"
+          >
+            <option
+              *ngFor="let quarter of quarterList.sort()"
+              value="{{ quarter }}"
+            >
+              {{ quarter.toUpperCase() }}
+            </option>
+          </select>
+        </div>
+        <div class="selectCol">
+          <label>Month</label>
+          <select formControlName="month" *ngIf="q1" class="point">
+            <option value="all">All</option>
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+          </select>
+          <select formControlName="month" *ngIf="q2" class="point">
+            <option value="all">All</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+          </select>
+          <select formControlName="month" *ngIf="q3" class="point">
+            <option value="all">All</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+          </select>
+          <select formControlName="month" *ngIf="q4" class="point">
+            <option value="all">All</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+          </select>
+        </div>
+
+        <div class="selectCol">
+          <label>&nbsp;</label>
+          <button class="submitBtn point" (click)="refresh()">Submit</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="summyPanels scenarioDatat">
+      <div *ngFor="let scenario of scenarioList | slice: 0:1" class="dataCol">
+        <div class="topText">{{ scenario.scenario_name }}</div>
+        <div class="infotabs">
+          <div class="scenCol">
+            <label>Spend</label>
+            <strong
+              >AED {{ scenario.spend }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>ROI</label>
+            <strong
+              >{{ scenario.roi }}</strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>GMV</label>
+            <strong
+              >AED {{ scenario.gmv }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }}</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>Contribution Margin</label>
+            <strong
+              >AED {{ scenario.cm }}
+              <span style="font-size: 12px"
+                >{{ scenario.cm_perc }} %</span
+              ></strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="order">Order</label>
+            <strong
+              >{{ scenario.order }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_orders }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="acquisitions">Net New Customer</label>
+            <strong
+              >{{ scenario.acquisitions }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_acquisitions }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="CPO">Cost per Order</label>
+            <strong class="CPOval">{{ scenario.costOfOrder }}</strong>
+          </div>
+          <div class="scenCol">
+            <label class="CPA">Cost per Customer Acquisition</label>
+            <strong class="CPAval">{{ scenario.costOfAcquisition }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="summyPanels scenarioDatat">
+      <div *ngFor="let scenario of scenarioList | slice: 1:2" class="dataCol">
+        <div class="topText">{{ scenario.scenario_name }}</div>
+        <div class="infotabs">
+          <div class="scenCol">
+            <label>Spend</label>
+            <strong
+              >AED {{ scenario.spend }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>ROI</label>
+            <strong
+              >{{ scenario.roi }}</strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>GMV</label>
+            <strong
+              >AED {{ scenario.gmv }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }}</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>Contribution Margin</label>
+            <strong
+              >AED {{ scenario.cm }}
+              <span style="font-size: 12px"
+                >{{ scenario.cm_perc }} %</span
+              ></strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="order">Order</label>
+            <strong
+              >{{ scenario.order }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_orders }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="acquisitions">Net New Customer</label>
+            <strong
+              >{{ scenario.acquisitions }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_acquisitions }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="CPO">Cost per Order</label>
+            <strong class="CPOval">{{ scenario.costOfOrder }}</strong>
+          </div>
+          <div class="scenCol">
+            <label class="CPA">Cost per Customer Acquisition</label>
+            <strong class="CPAval">{{ scenario.costOfAcquisition }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summyPanels scenarioDatat">
+      <div *ngFor="let scenario of scenarioList | slice: 2:3" class="dataCol">
+        <div class="topText">{{ scenario.scenario_name }}</div>
+        <div class="infotabs">
+          <div class="scenCol">
+            <label>Spend</label>
+            <strong
+              >AED {{ scenario.spend }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>ROI</label>
+            <strong
+              >{{ scenario.roi }}</strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>GMV</label>
+            <strong
+              >AED {{ scenario.gmv }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_spends }}</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label>Contribution Margin</label>
+            <strong
+              >AED {{ scenario.cm }}
+              <span style="font-size: 12px"
+                >{{ scenario.cm_perc }} %</span
+              ></strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="order">Order</label>
+            <strong
+              >{{ scenario.order }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_orders }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="acquisitions">Net New Customer</label>
+            <strong
+              >{{ scenario.acquisitions }}
+              <!-- <span style="font-size: 12px"
+                >{{ scenario.change_in_acquisitions }} %</span
+              > -->
+              </strong
+            >
+          </div>
+          <div class="scenCol">
+            <label class="CPO">Cost per Order</label>
+            <strong class="CPOval">{{ scenario.costOfOrder }}</strong>
+          </div>
+          <div class="scenCol">
+            <label class="CPA">Cost per Customer Acquisition</label>
+            <strong class="CPAval">{{ scenario.costOfAcquisition }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="myContainer" style="margin-bottom: 0">
+      <article
+        class="fullCol"
+        style="background: none; box-shadow: none; padding: 0"
+      >
+        <div class="topSection scenSecton">
+          <!-- code for download and refresh icons-->
+          <div class="download">
+            <a class="download-zip-link" #downloadZipLink
+              ><img
+                src="assets/Icon-Download.png"
+                alt="downloadIcon"
+                class="point"
+                (click)="downloadDetails()"
+            /></a>
+            <img
+              src="assets/Icon-Reset_Disable.png"
+              onmouseover="hover(assets/Icon-Reset_Enable.pn);"
+              onmouseout="unhover(assets/Icon-Reset_Disable.pn);"
+              alt="refresh icon"
+              (click)="refresh()"
+              class="refresh point"
+            />
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="myContainer">
+      <article class="fullCol">
+        <div class="bottomSection runchannelbtn1">
+          <span class="scenarioText"
+            >Following table allows the user to change the bucket and channel
+            level spends and check its impact on orders and acquisitions</span
+          >
+          <a
+            class="customiseBtn"
+            style="cursor: pointer"
+            (click)="submitScenarioForm()"
+            >Run Scenario</a
+          >
+        </div>
+        <div class="tableSection">
+          <!-- code for table-->
+          <table
+            class="table table-condensed"
+            style="border-collapse: collapse"
+          >
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Base Spend (AED)</th>
+                <th>New Spend (AED)</th>
+                <th>Change %</th>
+
+                <th>Additional Cost (AED)</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!eventFired">
+              <tr>
+                <td colspan="6">
+                  <table
+                    class="innerTable"
+                    *ngFor="
+                      let scenario_details of scenarioDetailsList;
+                      index as i
+                    "
+                  >
+                    <!-- code for collapse table-->
+                    <tr>
+                      <td
+                        data-toggle="collapse"
+                        [attr.data-target]="'.demo1' + i"
+                        class="collapsed"
+                      >
+                        <i class="fa fa-plus" aria-hidden="false"></i>
+                        {{ scenario_details.type }}
+                      </td>
+                      <td>
+                        <span
+                          ><label>{{ scenario_details.totalBaseSpend }}</label>
+                          <progress
+                            id="file"
+                            class="baseSpendBar"
+                            value="{{ scenario_details.totalBaseSpendNum }}"
+                            max="{{ largerBase }}"
+                          ></progress>
+                        </span>
+                      </td>
+
+                      <td>
+                        <span>
+                          <label> </label>
+                          <input
+                            type="number"
+                            value="{{ scenario_details.totalNewSpendNum }}"
+                            class="inputTable"
+                            #input
+                            (change)="
+                              scenarioTypeRangeChange(
+                                input.value,
+                                scenario_details.totalBaseSpend,
+                                scenario_details.type
+                              )
+                            "
+                            (change)="
+                              alertPromptChangeSpend(
+                                input.value,
+                                scenario_details.totalBaseSpendNum,
+                                scenario_details.totalNewSpend
+                              )
+                            "
+                          /><span class="unit">{{
+                            scenario_details.totalNewSpend
+                          }}</span>
+                        </span>
+                      </td>
+
+                      <td>
+                        <span
+                          ><label>&nbsp;</label
+                          >{{ scenario_details.typeTotalChange }}</span
+                        >
+                      </td>
+
+                      <td>
+                        <span
+                          ><label>&nbsp;</label
+                          >{{ scenario_details.delta }}</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- code for expand table-->
+                    <tr>
+                      <td class="hiddenRow">
+                        <div
+                          class="collapse demo1{{ i }}"
+                          *ngFor="let channel of scenario_details.channels"
+                        >
+                          <span><label>&nbsp;</label>{{ channel }}</span>
+                        </div>
+                      </td>
+                      <td class="hiddenRow">
+                        <div class="collapse demo1{{ i }}">
+                          <span
+                            *ngFor="
+                              let bs of scenario_details.baseSpend;
+                              index as ibs
+                            "
+                            ><label>{{ bs.valueK }}</label>
+                            <progress
+                              value="{{ bs.valueNum }}"
+                              max="{{ largerBase }}"
+                            ></progress>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="hiddenRow">
+                        <div class="collapse demo1{{ i }}">
+                          <span
+                            *ngFor="
+                              let bs of scenario_details.newSpend;
+                              let ind = index
+                            "
+                          >
+                            <label></label>
+                            <input
+                              *ngIf="bs.enable_input"
+                              value="{{ bs.valueNum }}"
+                              class="inputTable"
+                              #inputInner
+                              type="number"
+                              (change)="
+                                scenarioSpecificRangeChange(
+                                  bs.valueK,
+                                  inputInner.value,
+                                  scenario_details.totalBaseSpend,
+                                  scenario_details.totalNewSpendNum,
+                                  scenario_details.channels,
+                                  ind,
+                                  scenario_details.baseSpend,
+                                  scenario_details.type
+                                )
+                              "
+                            />
+                            <input
+                              *ngIf="!bs.enable_input"
+                              type="number"
+                              disabled
+                              value="{{ bs.valueNum }}"
+                              class="inputTable"
+                              data-toggle="tooltip"
+                              title="The channel input is been disabled as it does not contribute to the incremental acquisitions/orders"
+                            />
+                            <span class="unit">{{ bs.valueK }}</span>
+                          </span>
+                        </div>
+                      </td>
+
+                      <td class="hiddenRow">
+                        <div
+                          class="collapse demo1{{ i }}"
+                          *ngFor="
+                            let ns of scenario_details.customChange;
+                            let ind = index
+                          "
+                        >
+                          <span><label>&nbsp;</label>{{ ns }}</span>
+                        </div>
+                      </td>
+
+                      <td class="hiddenRow">
+                        <div
+                          class="collapse demo1{{ i }}"
+                          *ngFor="let a_cost of scenario_details.additionalCost"
+                        >
+                          <span><label>&nbsp;</label>{{ a_cost }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="eventFired">
+              <tr>
+                <td colspan="6">
+                  <table
+                    class="innerTable"
+                    *ngFor="
+                      let scenario_details of scenarioDetailsList;
+                      index as i
+                    "
+                  >
+                    <!-- code for collapse table-->
+                    <tr>
+                      <td
+                        data-toggle="collapse"
+                        [attr.data-target]="'.demo2' + i"
+                      >
+                        <i class="fa fa-plus" aria-hidden="false"></i>
+                        {{ scenario_details.type }}
+                      </td>
+                      <td>
+                        <span
+                          ><label>{{ scenario_details.totalBaseSpend }}</label>
+                          <progress
+                            id="file"
+                            value="{{ scenario_details.totalBaseSpendNum }}"
+                            max="{{ largerBase }}"
+                          ></progress>
+                        </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label> </label>
+                          <input
+                            type="number"
+                            value="{{ scenario_details.totalNewSpendNum }}"
+                            class="inputTable"
+                            #input
+                            (change)="
+                              scenarioTypeRangeChange(
+                                input.value,
+                                scenario_details.totalBaseSpend,
+                                scenario_details.type
+                              )
+                            "
+                            (change)="
+                              alertPromptChangeSpend(
+                                input.value,
+                                scenario_details.totalBaseSpendNum,
+                                scenario_details.totalNewSpend
+                              )
+                            "
+                          />
+                          <span class="unit">{{
+                            scenario_details.totalNewSpend
+                          }}</span>
+                        </span>
+                      </td>
+
+                      <td>
+                        <span
+                          ><label>&nbsp;</label
+                          >{{ scenario_details.typeTotalChange }}</span
+                        >
+                      </td>
+
+                      <td>
+                        <span
+                          ><label>&nbsp;</label
+                          >{{ scenario_details.delta }}</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- code for expand table-->
+                    <tr>
+                      <td class="hiddenRow">
+                        <div
+                          class="show demo2{{ i }}"
+                          *ngFor="let channel of scenario_details.channels"
+                        >
+                          <span><label>&nbsp;</label>{{ channel }}</span>
+                        </div>
+                      </td>
+                      <td class="hiddenRow">
+                        <div class="show demo2{{ i }}">
+                          <span
+                            *ngFor="
+                              let bs of scenario_details.baseSpend;
+                              index as ibs
+                            "
+                            ><label>{{ bs.valueK }}</label>
+                            <progress
+                              value="{{ bs.valueNum }}"
+                              max="{{ largerBase }}"
+                            ></progress>
+                          </span>
+                        </div>
+                      </td>
+
+                      <td class="hiddenRow">
+                        <div class="show demo2{{ i }}">
+                          <span
+                            *ngFor="
+                              let bs of scenario_details.newSpend;
+                              let ind = index
+                            "
+                          >
+                            <label></label>
+                            <input
+                              *ngIf="bs.enable_input"
+                              type="number"
+                              value="{{ bs.valueNum }}"
+                              class="inputTable"
+                              #inputInner
+                              (change)="
+                                scenarioSpecificRangeChange(
+                                  bs.valueK,
+                                  inputInner.value,
+                                  scenario_details.totalBaseSpend,
+                                  scenario_details.totalNewSpendNum,
+                                  scenario_details.channels,
+                                  ind,
+                                  scenario_details.baseSpend,
+                                  scenario_details.type
+                                )
+                              "
+                            />
+                            <input
+                              *ngIf="!bs.enable_input"
+                              type="number"
+                              disabled
+                              value="{{ bs.valueNum }}"
+                              class="inputTable"
+                              data-toggle="tooltip"
+                              title="The channel input is been disabled as it does not contribute to the incremental acquisitions/orders"
+                            /><span class="unit">{{ bs.valueK }}</span>
+                          </span>
+                        </div>
+                      </td>
+
+                      <td class="hiddenRow">
+                        <div
+                          class="show demo2{{ i }}"
+                          *ngFor="
+                            let ns of scenario_details.customChange;
+                            let ind = index
+                          "
+                        >
+                          <span><label>&nbsp;</label>{{ ns }}</span>
+                        </div>
+                      </td>
+                      <td class="hiddenRow">
+                        <div
+                          class="show demo2{{ i }}"
+                          *ngFor="let a_cost of scenario_details.additionalCost"
+                        >
+                          <span><label>&nbsp;</label>{{ a_cost }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- code for footer -->
+<footer class="footer">
+  Copyright © 2020, Market Mix Model. All rights reserved
+  <a class="footerLogo"
+    ><img src="assets/eClerx-Digital-Logo-New.png" alt="Logo"
+  /></a>
+</footer>

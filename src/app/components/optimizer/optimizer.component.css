@@ -1,0 +1,797 @@
+.table th {
+  text-align: center;
+  vertical-align: middle;
+}
+.table th:first-child,
+.table td:first-child {
+  text-align: left;
+}
+.innerTable tr th:first-child {
+  text-align: center;
+}
+.innerTable tr th {
+  padding: 0;
+}
+/* Css for Optimizer page Section */
+.myContainer {
+  margin-top: 30px;
+}
+.newOptimiz {
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Helvetica Neue";
+}
+.plannedSpend label {
+  margin-right: 9px;
+  font-weight: 600;
+  color: #5c5c5c;
+}
+.plannedSpend input {
+  padding: 6px 10px;
+  border: 1px solid #a3a3a3;
+  border-radius: 20px;
+  outline: none;
+  background: #e4e4e4;
+  height: 45px;
+  box-sizing: border-box;
+  width: 185px;
+  text-align: center;
+}
+.plannedSpend:first-child input {
+  background: none;
+}
+.planSpend input {
+  padding: 6px 10px;
+  border: 1px solid #a3a3a3;
+  border-radius: 20px;
+  outline: none;
+  height: 45px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.newtableSection {
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0px 1px 6px #aeaed680;
+  border-radius: 10px;
+  margin: 30px 0;
+}
+.newtableSection table td:nth-child(2) {
+  width: 26%;
+}
+.newtableSection table td:nth-child(1) {
+  width: 14%;
+  text-align: center;
+}
+.tableContainer {
+  padding: 0 10px 0;
+}
+.channelLastTable {
+  text-align: left !important;
+}
+
+.tableContainer table.innerTable td label {
+  padding-bottom: 5px;
+}
+
+.amchartDiv {
+  display: flex;
+  margin-top: 20px;
+}
+.graphText {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  margin: 0 5px;
+  width: 33%;
+}
+.graphText h6 {
+  margin-bottom: 31px;
+  margin-top: 24px;
+}
+table.table.table-striped.tableProp tr td:nth-child(4) {
+  text-align: left;
+}
+.channelSelect.bucketChanl a {
+  border: 1px solid;
+  display: inline-block;
+  padding: 10px;
+  width: 120px;
+  text-align: center;
+  border-radius: 20px 0 0 20px;
+}
+.channelSelect.bucketChanl a:last-child {
+  border-radius: 0 20px 20px 0;
+}
+.channelSelect.bucketChanl a.selectedToggle {
+  background-color: grey;
+  color: white;
+}
+.changeInputs aside {
+  text-align: center;
+}
+.defalutChange label {
+  margin-bottom: 10px;
+}
+/* Css for Table Sections - three color labels in Table with some percentage data */
+.fillRatio {
+  display: flex;
+  flex-direction: row;
+}
+.fillRatio span {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 17%;
+}
+.fillRatio span label {
+  text-align: center;
+  width: 100%;
+  color: #000;
+}
+.fill {
+  width: 100%;
+  height: 24px;
+  background: #3cd59d;
+  color: #fff;
+  border-right: solid 1px #fff;
+  padding: 4px 0;
+  font-size: 12px;
+  flex-grow: 1;
+}
+.fill:last-child {
+  border-right: none;
+}
+.fill.green {
+  border-radius: 20px 0px 0px 20px;
+}
+.fill.blue {
+  width: 100%;
+  height: 24px;
+  background: #5281cb;
+}
+.fill.blue1 {
+  width: 100%;
+  height: 24px;
+  background: #37bcd5;
+  border-radius: 0px 20px 20px 0;
+}
+.tableSection .tableContainer {
+  padding: 0;
+}
+.table td mark {
+  padding: 0 !important;
+  background: none !important;
+  color: #000;
+}
+.resultTp {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* Css for Information Section */
+.infoCol {
+  width: 100%;
+  padding: 5px 0px 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  text-align: left;
+  color: #777;
+}
+.bottomSection.pageButtons {
+  margin: 20px 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.newtableSection .table,
+.tableContainer table {
+  border: solid 1px #bcdeff;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #bcdeff;
+}
+.newtableSection .table-striped tbody tr:nth-of-type(even),
+.tableContainer .table-striped tr:nth-of-type(even) {
+  background: #fff;
+}
+.planSend label {
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+/* Css for Color Labels */
+.colorLabel {
+  width: 98%;
+  display: flex;
+  line-height: normal;
+  padding: 20px 0;
+  font-size: 15px;
+  margin: auto;
+  box-sizing: border-box;
+}
+.colorLabel span {
+  margin-left: 2%;
+  position: relative;
+  margin-right: 15px;
+}
+.colorLabel span::before {
+  border-radius: 20px;
+  content: "";
+  background: #3cd59d;
+  width: 17px;
+  height: 8px;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  bottom: 0;
+  margin: auto;
+}
+.colorLabel span:nth-child(2)::before {
+  background: #5281cb;
+}
+.colorLabel span:nth-child(3)::before {
+  background: #37bcd5;
+}
+/* Css for Buttons */
+.runchannelbtn {
+  justify-content: flex-end;
+  padding: 0;
+  padding-top: 20px;
+}
+.runchannelbtn1 {
+  justify-content: space-between;
+  padding: 0;
+  padding-top: 20px;
+}
+.bottomSection.runchannelbtn1 a:first-child {
+  padding-left: 10px;
+  color: #488ad8;
+  font-weight: bold;
+}
+.backtoWorkbench {
+  color: blue;
+}
+.download {
+  display: flex;
+  align-items: flex-end;
+  padding: 15px 0;
+  justify-content: flex-end;
+}
+.planSpend {
+  align-items: flex-end;
+  display: flex;
+}
+.defalutChange {
+  display: flex;
+  align-items: flex-end;
+  width: 59%;
+}
+.changeInputs {
+  display: flex;
+  align-items: flex-end;
+}
+.changeInputs aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 245px;
+}
+.changeInputs aside input {
+  padding: 6px 10px;
+  border: 1px solid #a3a3a3;
+  border-radius: 20px;
+  outline: none;
+  margin-right: 5px;
+  height: 45px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.planSpend label,
+.defalutChange label {
+  margin-right: 8px;
+  font-weight: 600;
+  color: #5c5c5c;
+}
+.changeInputs aside label {
+  text-align: center;
+  width: 192px;
+  font-size: 16px;
+  font-weight: 600;
+}
+/* Css for Table Sections */
+.tableContainer table.innerTable {
+  width: 100%;
+  border-radius: 0px;
+  background-color: transparent;
+  background: transparent;
+  border: none;
+}
+table.innerTable tr {
+  display: block;
+  width: 100%;
+  background: transparent !important;
+}
+table.innerTable tr:nth-of-type(odd),
+table.innerTable tr:nth-of-type(even) {
+  background-color: #f2f8ff;
+}
+.tableContainer table.innerTable tr:first-child th {
+  width: 100%;
+}
+.tableContainer table.innerTable th {
+  width: 50%;
+  display: inline-block;
+}
+.tableContainer table.innerTable tr:last-child th {
+  font-size: 14px;
+  font-weight: 400;
+  color: #5c5c5c;
+}
+.tableContainer table.innerTable td {
+  width: 50% !important;
+  border: 0;
+  background: none;
+  display: inline-block;
+}
+.tableContainer table.innerTable td input {
+  width: 75%;
+  padding: 3px 10px;
+  padding: 6px 10px;
+  border: 1px solid #a3a3a3;
+  border-radius: 20px;
+  outline: none;
+  margin-right: 5px;
+  text-align: center;
+}
+.plannedSpend {
+  display: flex;
+  align-items: center;
+}
+.plannedSpend label small {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  color: #949292;
+}
+.planSpend label small {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  color: #949292;
+}
+
+.selecctSection form {
+  width: 100%;
+  display: flex;
+}
+.planSend.resultTitle {
+  display: flex;
+  font-size: 18px;
+  width: 90%;
+  align-items: center;
+  font-weight: 600;
+  color: #5c5c5c;
+}
+.modal-dialog {
+  max-width: 100% !important;
+}
+
+.selecctSection.optSec.optPg .selectCol select {
+  background: #e4e4e4;
+}
+.plannedSpend:first-child input[type="text"]:disabled {
+  background: #e4e4e4;
+}
+/* Media query CSS for screen resolution between 1800 & 2600 */
+@media (min-width: 1800px) and (max-width: 2600px) {
+  .plannedSpend label,
+  .boundaryLabel {
+    font-size: 20px;
+  }
+  .table td,
+  .table th,
+  .submitBtn,
+  .bottomSection a.customiseBtn {
+    font-size: 20px;
+  }
+  .colorLabel {
+    font-size: 16px;
+  }
+  .infoCol {
+    font-size: 20px;
+  }
+  .scenCol strong {
+    font-size: 36px;
+  }
+  .tableContainer table.innerTable tr:last-child th {
+    font-size: 17px;
+  }
+  .plannedSpend label,
+  .boundaryLabel {
+    font-size: 22px;
+  }
+  .planSpend label,
+  .defalutChange label {
+    font-size: 20px;
+  }
+  .changeInputs aside label {
+    font-size: 18px;
+  }
+}
+/* Media query CSS for screen resolution between 1650 & 1799 */
+@media (min-width: 1650px) and (max-width: 1799px) {
+  .plannedSpend label,
+  .boundaryLabel {
+    font-size: 18px;
+  }
+
+  .table td,
+  .table th,
+  .submitBtn,
+  .bottomSection a.customiseBtn {
+    font-size: 18px;
+  }
+  .colorLabel {
+    font-size: 16px;
+  }
+  .infoCol {
+    font-size: 18px;
+  }
+  .tableContainer table.innerTable tr:last-child th {
+    font-size: 16px;
+  }
+  .plannedSpend label,
+  .boundaryLabel {
+    font-size: 20px;
+  }
+  .planSpend label,
+  .defalutChange label {
+    font-size: 20px;
+  }
+  .changeInputs aside label {
+    font-size: 18px;
+  }
+}
+/* Media query CSS for screen resolution 1280 */
+@media (max-width: 1280px) {
+  .topSection {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .defalutChange {
+    order: 3;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+#countryOptimizerResult,
+#countryWorkBench {
+  display: none;
+}
+.customiseBtn {
+  cursor: pointer;
+}
+/* Media query CSS for screen resolution 960 */
+@media (max-width: 960px) {
+  .plannedSpend {
+    width: 30%;
+  }
+  .topSection {
+    flex-wrap: wrap;
+  }
+  .tableContainer {
+    overflow-x: scroll;
+  }
+  .tableContainer table {
+    width: 100%;
+  }
+  .optSec form {
+    flex-wrap: wrap;
+  }
+  .optSec .selectCol {
+    width: 30%;
+    margin-bottom: 10px;
+    margin-right: 3%;
+  }
+}
+/* Media query CSS for screen resolution 820 */
+@media (max-width: 820px) {
+  .newOptimiz {
+    flex-wrap: wrap;
+  }
+  .tableContainer table {
+    width: 815px;
+  }
+}
+/* Media query CSS for screen resolution 760 */
+@media (max-width: 768px) {
+  .plannedSpend {
+    width: 48%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .plannedSpend label {
+    margin-right: 0px;
+    width: 100%;
+  }
+  .plannedSpend label small {
+    display: inline;
+  }
+  .plannedSpend input {
+    width: 100%;
+  }
+  .defalutChange {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* Media query CSS for screen resolution 720 */
+@media (max-width: 720px) {
+  .changeInputs {
+    width: 100%;
+  }
+  .changeInputs aside {
+    flex-direction: row;
+    width: 50%;
+  }
+  .optSec .selectCol {
+    width: 46%;
+    margin-bottom: 10px;
+  }
+}
+/* Media query CSS for screen resolution 670 */
+@media (max-width: 670px) {
+  .plannedSpend {
+    width: 47%;
+    margin: 0 0 10px;
+  }
+  .newtableSection {
+    overflow: hidden;
+  }
+  .colorLabel {
+    margin-left: 25px;
+  }
+  .tableContainer {
+    overflow: scroll;
+  }
+  .runchannelbtn {
+    justify-content: center;
+  }
+  .runchannelbtn1 {
+    display: block;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .runchannelbtn1 a {
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+  }
+  .bottomSection a.customiseBtn {
+    font-size: 17px;
+  }
+}
+/* Media query CSS for screen resolution 606 */
+@media (max-width: 606px) {
+  .planSpend {
+    align-items: flex-start;
+  }
+  .changeInputs aside {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .optSec .selectCol {
+    width: 45%;
+    margin-bottom: 10px;
+  }
+  .bottomSection.pageButtons {
+    flex-direction: column;
+  }
+  .bottomSection a.customiseBtn {
+    font-size: 18px;
+    margin-top: 10px;
+    width: 80%;
+  }
+  .plannedSpend {
+    justify-content: space-between;
+  }
+  .plannedSpend label small {
+    display: block;
+    text-align: left;
+  }
+}
+/* Media query CSS for screen resolution 570 */
+@media (max-width: 570px) {
+  .changeInputs {
+    flex-direction: column;
+  }
+  .changeInputs aside {
+    flex-direction: row;
+  }
+  .changeInputs aside label {
+    width: auto;
+    text-align: left;
+  }
+}
+/* Media query CSS for screen resolution 512 */
+@media (max-width: 512px) {
+  .bottomSection.pageButtons {
+    display: block;
+  }
+  a.customiseBtn {
+    display: flex;
+    margin: 10px;
+    text-align: center;
+  }
+  .optSec .selectCol {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+}
+/* Media query CSS for screen resolution 480 */
+@media (max-width: 480px) {
+  body {
+    overflow: hidden;
+  }
+  .plannedSpend {
+    width: 100%;
+    margin: 0 0 10px;
+  }
+  .bottomSection.pageButtons {
+    display: flex;
+  }
+  a.customiseBtn {
+    display: block;
+    margin: 10px;
+    text-align: center;
+    padding: 10px 20px;
+  }
+  .colorLabel {
+    display: none;
+  }
+  .bottomSection.runchannelbtn1  {
+    display: block;
+  }
+  .bottomSection.runchannelbtn1 a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: auto auto 10px;
+  }
+  .planSpend {
+    flex-direction: column;
+    width: 85%;
+  }
+  .planSpend label {
+    width: 100%;
+  }
+  .planSpend label small {
+    display: inline;
+  }
+}
+.tableProp th,
+ .tableProp td {
+  width: auto;
+  text-align: center;
+}
+@media (max-width: 420px) {
+  .download {
+    order: 3;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+select.selectCHannel {
+  width: 45%;
+  padding: 5px;
+  margin-top: -49px;
+  margin-left: 53%;
+  border-radius: 20px;
+  margin-bottom: 31px;
+}
+h6.graphbuck {
+  width: 28%;
+  margin-bottom: 31px;
+  margin-top: 24px;
+}
+h6.graphbuck1 {
+  width: 50%;
+  margin-bottom: 31px;
+  margin-top: 24px;
+}
+.selectCHannel {
+  display: none;
+}
+button.customiseBtn1 {
+  margin-right: 2%;
+  width: 54%;
+  border-radius: 20px;
+  color: white;
+  height: 32px;
+  border: none;
+  background: #488ad8;
+  font-weight: bold;
+}
+.BoundaryDiv {
+  width: 21%;
+}
+.boundaryLabel {
+  margin-right: 1%;
+  padding: 0px;
+  margin-top: 3%;
+  font-weight: bold;
+  color: #5c5c5c;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  margin-top: 0.5%;
+  height: 34px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #2196f3;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+.goToScenarioArrow {
+  width: 25px;
+  float: right;
+  cursor: pointer;
+}
+
+.textForAcronyms {
+  margin-left: -0.5%;
+}
+li.liAcro {
+  list-style-type: none;
+  margin-left: 2%;
+}
+ul.ulAcro {
+  display: flex;
+}

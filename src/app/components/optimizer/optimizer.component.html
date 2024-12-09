@@ -1,0 +1,1081 @@
+<section class="contentWrapper">
+  <div class="contentArea" id="landPageOpti">
+    <div class="optimizer">
+      <h2>Optimizer Tool Recommendation</h2>
+    </div>
+    <div class="download" style="margin-left: 93% !important; margin-top: -4%">
+      <label
+        style="
+          margin-right: 11%;
+          margin-top: 4%;
+          color: #5c5c5c;
+          font-weight: bold;
+          font-size: 16px;
+          padding-left: 18px;
+        "
+        >OptimizationFor</label
+      >
+      <select
+        style="
+          background: #ffffff 0% 0% no-repeat padding-box;
+          height: 30px;
+          box-sizing: border-box;
+          border: 1px solid #a3a3a3;
+          border-radius: 8px;
+          padding: 2px;
+          outline: none;
+          font-size: 16px;
+          color: #5c5c5c;
+        "
+        #optimization
+        (change)="optimizationChange(optimization.value)"
+        class="point"
+      >
+        <option
+          *ngFor="let metric of metricOfInterestList"
+          value="{{ metric }}"
+        >
+          {{ metric }}
+        </option>
+      </select>
+    </div>
+    <!-- code for search filter (submit button) -->
+    <div class="newtableSection">
+      <div
+        class="selecctSection optSec"
+        style="box-shadow: none; margin-top: -10px; padding-bottom: 28px"
+      >
+        <form [formGroup]="optimizerToolForm" class="form">
+          <div class="selectCol">
+            <label>Country</label>
+            <select
+              formControlName="country"
+              #countrySelect
+              (change)="filtersCountry(countrySelect.value, 'country')"
+              class="point"
+            >
+              <option *ngFor="let country of countryList" value="{{ country }}">
+                <span *ngIf="!country.includes('-')">{{ country }}</span>
+                <span *ngIf="country.includes('-')">{{
+                  country.split("-")[1]
+                }}</span>
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>City</label>
+
+            <select
+              formControlName="city"
+              #citySelect
+              (change)="filtersCountry(citySelect.value, 'city')"
+              class="point"
+            >
+              <option *ngFor="let city of cityList" value="{{ city }}">
+                <span *ngIf="!city.includes('-')">{{ city }}</span>
+                <span *ngIf="city.includes('-')">{{ city.split("-")[1] }}</span>
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Category</label>
+            <select formControlName="category">
+              <option
+                *ngFor="let category of categoryList"
+                value="{{ category }}"
+              >
+                {{ category }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Year</label>
+            <select
+              formControlName="year"
+              class="point"
+              #yearSelect
+              (change)="filtersCountry(yearSelect.value, 'year')"
+            >
+              <option *ngFor="let year of yearList" value="{{ year }}">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Quarter</label>
+            <select
+              formControlName="quarter"
+              class="point"
+              #mySelect1
+              (change)="onOptionsSelected(mySelect1.value)"
+            >
+              <option
+                *ngFor="let quarter of quarterList.sort()"
+                value="{{ quarter }}"
+              >
+                {{ quarter.toUpperCase() }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Month</label>
+            <select formControlName="month" *ngIf="q1" class="point">
+              <option value="all">All</option>
+              <option value="january">January</option>
+              <option value="february">February</option>
+              <option value="march">March</option>
+            </select>
+            <select formControlName="month" *ngIf="q2" class="point">
+              <option value="all">All</option>
+              <option value="april">April</option>
+              <option value="may">May</option>
+              <option value="june">June</option>
+            </select>
+            <select formControlName="month" *ngIf="q3" class="point">
+              <option value="all">All</option>
+              <option value="july">July</option>
+              <option value="august">August</option>
+              <option value="september">September</option>
+            </select>
+            <select formControlName="month" *ngIf="q4" class="point">
+              <option value="all">All</option>
+              <option value="october">October</option>
+              <option value="november">November</option>
+              <option value="december">December</option>
+            </select>
+          </div>
+          <!-- <div class="selectCol">
+            <label>Optimization For</label>
+            <select
+              formControlName="maximization"
+              #optimization
+              (change)="optimizationChange(optimization.value)"
+              class="point"
+            >
+              <option
+                *ngFor="let metric of metricOfInterestList"
+                value="{{ metric }}"
+              >
+                {{ metric }}
+              </option>
+            </select>
+          </div> -->
+        </form>
+      </div>
+      <div
+        class="newtableSection"
+        style="box-shadow: none; margin-top: -24px; margin-bottom: -9px"
+      >
+        <!-- code for three inputs -->
+        <div class="newOptimiz">
+          <div class="plannedSpend">
+            <label
+              for="points"
+              style="
+                font-family: HelveticaNeue, Helvetica, Arial, sans-serif !important;
+              "
+              >{{ plannedText }}
+              <i
+                class="fa fa-info-circle internal1"
+                style="margin-right: 6px"
+                data-toggle="tooltip"
+                title="{{ plannedSpendInfo }}"
+              ></i
+              ><small>{{ thousand }}</small>
+            </label>
+
+            <input
+              type="number"
+              [ngModel]="plannedToolRecom"
+              (ngModelChange)="plannedSpendToolRecom($event)"
+              min="0"
+            />
+          </div>
+          <div class="BoundaryDiv">
+            <label
+              for="points"
+              class="boundaryLabel"
+              style="
+                font-family: HelveticaNeue, Helvetica, Arial, sans-serif !important;
+              "
+              >Boundary Condition
+              <i
+                class="fa fa-info-circle internal1"
+                style="margin-right: 6px"
+                data-toggle="tooltip"
+                title="Boundary condition ON will limit the maximum allowable change in channel level spend by 2X"
+              ></i
+            ></label>
+            <label class="switch">
+              <input
+                type="checkbox"
+                checked
+                (change)="boundaryConditionFun($event)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="plannedSpend">
+            <label>&nbsp;</label>
+            <button
+              class="submitBtn point"
+              (click)="submitoptimizerToolForm('0')"
+              style="width: 214px"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <div class="newtableSection">
+       <!-- <div class="textForAcronyms"> Cost of Orders - CoO, Net New Customer - NNC, Cost of Customer Acquisition - CoA, 
+        Contribution Margin - CM
+      </div> -->
+      <div class="textForAcronyms">
+        <ul class="ulAcro">
+          <li class="liAcro">CoO : Cost of Orders</li>
+          <li class="liAcro">NNC : Net New Customer</li>
+          <li class="liAcro">CoA : Cost of Customer Acquisition</li>
+          <li class="liAcro">CM : Contribution Margin</li>
+        </ul>
+      </div>
+      <div class="tableContainer" style="margin-top: 10px">
+        <!-- code for table-->
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th>Scenario</th>
+              <th></th>
+              <th>ROI</th>
+              <th>GMV</th>
+              <th>CM</th>
+              <th>Base Orders</th>
+              <th>Delta Orders</th>
+              <th>CoO (AED)</th>
+              <th>NNC</th>
+              <th>Delta Acquisition</th>
+              <th>CoA (AED)</th>
+            </tr>
+            <tr *ngFor="let opti of optiToolRecom; let i = index">
+              <td>{{ opti.scenario }}</td>
+              <td>
+                <div class="fillRatio">
+                  <span
+                    class="ratio"
+                    [style.width.%]="opti.performanceMarketting"
+                  >
+                    <div class="fill green">
+                      {{ opti.performanceMarkettingSpend }}
+                    </div>
+                    <label>{{ opti.performanceMarketting }}%</label>
+                  </span>
+                  <span class="ratio" [style.width.%]="opti.topOfMinds">
+                    <div class="fill blue">{{ opti.topOfMindsSpend }}</div>
+                    <label>{{ opti.topOfMinds }}%</label>
+                  </span>
+                  <span class="ratio" [style.width.%]="opti.incentives">
+                    <div class="fill blue1">{{ opti.incentivesSpend }}</div>
+                    <label>{{ opti.incentives }}%</label>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <mark>{{ opti.base_roi }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.base_gmv }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.base_cm }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.baseOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.additionalOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.costOfOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.baseAquisition }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.additionalAcquisition }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.costOfAcquisition }}</mark>
+                <!-- <img
+                  *ngIf="i > 0"
+                  class="goToScenarioArrow"
+                  src="assets/rightArrow.png"
+                  (click)="goToScenarioPage(i)"
+                /> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- code for labels-->
+      <div class="colorLabel">
+        <span>Social/Digital</span>
+        <span>Mind Metrics</span>
+        <span>Offers/Promotions</span>
+      </div>
+
+      <!-- code for bottom text-->
+      <div class="bottomSection">
+        <div class="infoCol">
+          *Tool recommended scenario uses -50% to 100% as range.
+        </div>
+      </div>
+      <!-- code for buttons-->
+      <div class="bottomSection pageButtons">
+        <!-- code for open graph-->
+        <a
+          class="customiseBtn"
+          data-toggle="modal"
+          data-target="#addTagModal"
+          (click)="checkOptimizationSelect()"
+          >Check Response Curves</a
+        >
+        <a></a>
+        <!-- code for go to workbench page-->
+        <a
+          class="customiseBtn"
+          onclick="displayWorkbench()"
+          (click)="optimizerWorkBenchPost()"
+          >Go to Workbench</a
+        >
+      </div>
+    </div>
+  </div>
+  <!----- Optimizer tool recommendation End here-->
+
+  <!----- Optimizer workbench Start here-->
+  <div class="contentArea" id="countryWorkBench">
+    <div class="optimizer" style="margin-top: 30px">
+      <h2>Optimizer Workbench</h2>
+    </div>
+    <div class="newtableSection">
+      <div
+        class="selecctSection optSec optPg"
+        style="box-shadow: none; margin-top: -8px"
+      >
+        <!-- code for search filter (submit button) -->
+        <form [formGroup]="optiWorkBenchForm" class="form">
+          <div class="selectCol">
+            <label>Country</label>
+            <select class="point" formControlName="country">
+              <option *ngFor="let country of countryList" value="{{ country }}">
+                <span *ngIf="!country.includes('-')">{{ country }}</span>
+                <span *ngIf="country.includes('-')">{{
+                  country.split("-")[1]
+                }}</span>
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>City</label>
+
+            <select formControlName="city" class="point">
+              <option *ngFor="let city of cityList" value="{{ city }}">
+                <span *ngIf="!city.includes('-')">{{ city }}</span>
+                <span *ngIf="city.includes('-')">{{ city.split("-")[1] }}</span>
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Category</label>
+            <select formControlName="category">
+              <option
+                *ngFor="let category of categoryList"
+                value="{{ category }}"
+              >
+                {{ category }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Year</label>
+            <select formControlName="year" class="point">
+              <option *ngFor="let year of yearList" value="{{ year }}">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Qtr</label>
+            <select
+              class="point"
+              formControlName="quarter"
+              #mySelect
+              (change)="onOptionsSelected(mySelect.value)"
+            >
+              <option
+                *ngFor="let quarter of quarterList.sort()"
+                value="{{ quarter }}"
+              >
+                {{ quarter.toUpperCase() }}
+              </option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Month</label>
+            <select class="point" formControlName="month" *ngIf="q1">
+              <option value="all">All</option>
+              <option value="january">January</option>
+              <option value="february">February</option>
+              <option value="march">March</option>
+            </select>
+            <select class="point" formControlName="month" *ngIf="q2">
+              <option value="all">All</option>
+              <option value="april">April</option>
+              <option value="may">May</option>
+              <option value="june">June</option>
+            </select>
+            <select class="point" formControlName="month" *ngIf="q3">
+              <option value="all">All</option>
+              <option value="july">July</option>
+              <option value="august">August</option>
+              <option value="september">September</option>
+            </select>
+            <select class="point" formControlName="month" *ngIf="q4">
+              <option value="all">All</option>
+              <option value="october">October</option>
+              <option value="november">November</option>
+              <option value="december">December</option>
+            </select>
+          </div>
+          <div class="selectCol">
+            <label>Optimization For</label>
+            <select class="point" formControlName="maximization" #maximization>
+              <option
+                *ngFor="let metric of metricOfInterestList"
+                value="{{ metric }}"
+              >
+                {{ metric }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <!-- code for inputs fields -->
+      <div class="topSection" style="margin-top: -25px; margin-bottom: 10px">
+        <div class="planSpend">
+          <label for="points"
+            >{{ plannedText }} <small>{{ thousand }}</small>
+          </label>
+          <input
+            type="number"
+            [ngModel]="plannedWorkBench"
+            (ngModelChange)="plannedSpendworkbench($event)"
+          />
+        </div>
+        <div class="defalutChange">
+          <label for="points">Default Allowable Change</label>
+          <div class="changeInputs">
+            <aside>
+              <label>Lower Limit</label
+              ><input
+                type="number"
+                style="width: 92%"
+                [ngModel]="workBenchLowerLimit"
+                (ngModelChange)="workBenchLowerLimitFun($event)"
+              />
+              %
+            </aside>
+            <aside>
+              <label>Upper Limit</label
+              ><input
+                type="number"
+                [ngModel]="workBenchUperLimit"
+                (ngModelChange)="workBenchUperLimitFun($event)"
+                style="width: 92%"
+              />
+              %
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- code for download and refresh icon-->
+    <div
+      class="download"
+      style="margin-left: 90%; margin-top: -12px; margin-bottom: -15px"
+    >
+      <img
+        src="assets/Icon-Reset_Enable.png"
+        (click)="optimizerWorkBenchPost()"
+        alt="refresh icon"
+        class="point"
+      />
+    </div>
+    <div class="myContainer">
+      <article class="fullCol">
+        <div class="tableSection">
+          <div class="tableContainer">
+            <!-- code for Table -->
+            <table class="table table-striped tableProp">
+              <tr>
+                <th>Type</th>
+                <th>Base<br />Spend (AED)</th>
+                <th>Threshold<br />Spend (AED)</th>
+                <th>Channel</th>
+                <th>Channel<br />Base Spend (AED)</th>
+                <th>Channel<br />Threshold Spend (AED)</th>
+                <th style="padding: 0 10px">
+                  <table class="innerTable">
+                    <tr>
+                      <th>Customised Allowable Change%</th>
+                    </tr>
+                    <tr>
+                      <th>Lower Limit</th>
+                      <th>Upper Limit</th>
+                    </tr>
+                  </table>
+                </th>
+              </tr>
+              <tr *ngFor="let optimizer of optimizerList; index as i">
+                <td>{{ optimizer.type }}</td>
+                <td>
+                  <mark>{{ optimizer.baseSpend }}</mark>
+                </td>
+                <td>
+                  <mark>{{ optimizer.thresholdSpend }}</mark>
+                </td>
+                <td>
+                  <span *ngFor="let channel of optimizer.channels"
+                    ><label>&nbsp;</label>{{ channel }}</span
+                  >
+                </td>
+                <td>
+                  <span *ngFor="let channelbase of optimizer.channelbaseSpend"
+                    ><label>{{ channelbase.valueK }}</label>
+                    <progress
+                      id="file"
+                      value="{{ channelbase.valueNum }}"
+                      max="{{ largerBase }}"
+                    ></progress>
+                  </span>
+                </td>
+                <td>
+                  <span
+                    *ngFor="
+                      let channelthresh of optimizer.channelthresholdSpend
+                    "
+                    ><label>{{ channelthresh.valueK }}</label>
+                    <progress
+                      id="file"
+                      value="{{ channelthresh.valueNum }}"
+                      max="{{ largerNew }}"
+                    ></progress>
+                  </span>
+                </td>
+                <td class="smallTd">
+                  <table class="innerTable">
+                    <tr
+                      *ngFor="
+                        let customLimit of optimizer.customizedLimitWorkbench;
+                        let ind = index
+                      "
+                    >
+                      <td>
+                        <span>
+                          <label> </label>
+                          <input
+                            type="number"
+                            placeholder="{{
+                              customLimit.customChargeLowerLimit
+                            }}"
+                            #lowerLimit
+                            value="{{ customLimit.customChargeLowerLimit }}"
+                            [ngModel]="workBenchLowerLimit"
+                            max="-1"
+                            oninput="setLowerLimit(this)"
+                            (change)="
+                              customizedLimitChange(
+                                lowerLimit.value,
+                                optimizer.type,
+                                optimizer.channelsBackend,
+                                ind,
+                                upperLimit.value,
+                                i
+                              )
+                            "
+                          />%
+                        </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label> </label>
+                          <input
+                            type="number"
+                            value="{{ customLimit.customChargeUpperLimit }}"
+                            placeholder="{{
+                              customLimit.customChargeUpperLimit
+                            }}"
+                            #upperLimit
+                            [ngModel]="workBenchUperLimit"
+                            min="1"
+                            oninput="setUperLimit(this)"
+                            (change)="
+                              customizedLimitChange(
+                                lowerLimit.value,
+                                optimizer.type,
+                                optimizer.channelsBackend,
+                                ind,
+                                upperLimit.value,
+                                i
+                              )
+                            "
+                          />%
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- code for run  channel optimizer button-->
+          <div class="bottomSection runchannelbtn1">
+            <a class="backtoWorkbench" class="point" onclick="displayTool()"
+              >&lt; &nbsp;Back to Optimizer Tool Recommendation</a
+            >
+            <a
+              class="customiseBtn"
+              onclick="displayCountryOptimizer()"
+              (click)="runChannelOptimizer()"
+              >Run Channel Optimization</a
+            >
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <!----- Optimizer workbench End here-->
+
+  <!----- Optimizer work bench results Start here-->
+  <div class="contentArea" id="countryOptimizerResult">
+    <h2>Optimizer Workbench Results</h2>
+    <div class="newtableSection">
+      <!-- code for inputs fields-->
+      <div class="newOptimiz">
+        <div class="plannedSpend">
+          <label
+            >{{ resultPlannedText }}<small>{{ thousand }}</small>
+          </label>
+          <input
+            type="text"
+            placeholder="{{ plannedWorkBenchResult }}"
+            disabled
+          />
+        </div>
+      </div>
+      <div class="tableContainer" *ngIf="showChannelResult">
+        <div class="textForAcronyms">
+          <ul class="ulAcro">
+            <li class="liAcro">CoO : Cost of Orders</li>
+            <li class="liAcro">NNC : Net New Customer</li>
+            <li class="liAcro">CoA : Cost of Customer Acquisition</li>
+            <li class="liAcro">CM : Contribution Margin</li>
+          </ul>
+        </div>
+        <!-- code for table-->
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th>Scenario</th>
+              <th></th>
+              <th>ROI</th>
+              <th>GMV</th>
+              <th>CM</th>
+              <th>Base Orders</th>
+              <th>Delta Orders</th>
+              <th>CoO (AED)</th>
+              <th>NNC</th>
+              <th>Delta Acquisition</th>
+              <th>CoA (AED)</th>
+            </tr>
+            <tr *ngFor="let opti of optiWorkbenchResultData">
+              <td>{{ opti.scenario }}</td>
+              <td>
+                <div class="fillRatio">
+                  <span
+                    class="ratio"
+                    [style.width.%]="opti.performanceMarketting"
+                  >
+                    <div class="fill green">
+                      {{ opti.performanceMarkettingSpend }}
+                    </div>
+                    <label>{{ opti.performanceMarketting }}%</label>
+                  </span>
+                  <span class="ratio" [style.width.%]="opti.topOfMinds">
+                    <div class="fill blue">{{ opti.topOfMindsSpend }}</div>
+                    <label>{{ opti.topOfMinds }}%</label>
+                  </span>
+                  <span class="ratio" [style.width.%]="opti.incentives">
+                    <div class="fill blue1">{{ opti.incentivesSpend }}</div>
+                    <label>{{ opti.incentives }}%</label>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <mark>{{ opti.base_roi }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.base_gmv }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.base_cm }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.baseOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.additionalOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.costOfOrder }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.baseAquisition }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.additionalAcquisition }}</mark>
+              </td>
+              <td>
+                <mark>{{ opti.costOfAcquisition }}</mark>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- code for labels-->
+      <div class="colorLabel" *ngIf="showChannelResult">
+        <span>Performance Marketing</span>
+        <span>Top of Mind</span>
+        <span>Incentives</span>
+      </div>
+      <!-- code for table  bottom sections text-->
+      <div class="bottomSection" *ngIf="showChannelResult">
+        <div class="infoCol">
+          *Tool recommended scenario uses +-50% as range.
+        </div>
+      </div>
+    </div>
+    <div class="myContainer">
+      <article class="fullCol">
+        <div class="topSection resultTp" *ngIf="showChannelResult">
+          <div class="planSend resultTitle">
+            <label for="points">Channel-wise Results </label>
+          </div>
+          <!-- code for download and refresh icon-->
+          <div class="download">
+            <img
+              src="assets/Icon-Download.png"
+              (click)="downloadDetails()"
+              alt="downloadIcon"
+              class="point"
+            />
+          </div>
+        </div>
+        <div class="tableSection" style="padding-top: 0">
+          <!-- code for data in table -->
+          <table
+            class="table table-striped tableProp"
+            *ngIf="showChannelResult"
+          >
+            <tbody>
+              <tr>
+                <th>Type</th>
+                <th>Total<br />Base Spend (AED)</th>
+                <th>Total<br />New Spend (AED)</th>
+                <th>Delta (AED)</th>
+                <th>Channel</th>
+                <th>Channel<br />Base Spend (AED)</th>
+                <th>Channel<br />New Spend (AED)</th>
+                <th>Channel<br />Delta (AED)</th>
+              </tr>
+              <tr *ngFor="let countryWise of countryWiseResult">
+                <td>{{ countryWise.type }}</td>
+                <td>
+                  <mark>{{ countryWise.baseSpend }}</mark>
+                </td>
+                <td>
+                  <mark>{{ countryWise.thresholdSpend }}</mark>
+                </td>
+                <td>
+                  <mark>{{ countryWise.delta }}</mark>
+                </td>
+                <td class="channelLastTable">
+                  <span *ngFor="let channel of countryWise.channels"
+                    ><label>&nbsp;</label>{{ channel }}</span
+                  >
+                </td>
+                <td>
+                  <span *ngFor="let channelbase of countryWise.channelbaseSpend"
+                    ><label>{{ channelbase.valueK }}</label>
+                    <progress
+                      id="file"
+                      value="{{ channelbase.valueNum }}"
+                      max="{{ largerBase }}"
+                    ></progress>
+                  </span>
+                </td>
+                <td>
+                  <span
+                    *ngFor="
+                      let channelthre of countryWise.channelthresholdSpend
+                    "
+                    ><label>{{ channelthre.valueK }}</label>
+                    <progress
+                      id="file"
+                      value="{{ channelthre.valueNum }}"
+                      max="{{ largerNew }}"
+                    ></progress>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let channelde of countryWise.channeldelta"
+                    ><label> &nbsp; </label><mark>{{ channelde }}</mark></span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- code for download result button -->
+          <div class="bottomSection runchannelbtn1">
+            <a
+              class="backtoWorkbench"
+              class="point"
+              onclick="displayWorkbench()"
+              >&lt; &nbsp;Back to Optimizer Workbench</a
+            >
+            <a
+              class="customiseBtn"
+              (click)="downloadDetails()"
+              *ngIf="showChannelResult"
+              >Download Results</a
+            >
+            <a
+            class="download-zip-link"
+            #downloadOptimizer
+            style="display: none"
+          ></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- code for footer -->
+<footer class="footer">
+  Copyright © 2020, Market Mix Model. All rights reserved
+  <a class="footerLogo"
+    ><img src="assets/eClerx-Digital-Logo-New.png" alt="Logo"
+  /></a>
+</footer>
+
+<!-- The Modal for curve responsive graph-->
+<div class="modal" id="addTagModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header" style="text-align: center">
+        <h5 style="margin-left: auto">Quarterly Response Curve</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!-- <div
+          class="channelSelect bucketChanl"
+          style="width: 800px; margin: auto !important; text-align: left"
+        >
+          <a
+            #clickAquisitionTab
+            id="AcquiTabOpti"
+            class="point selectedToggle"
+            onclick="AcquiCLickOptimizer()"
+            (click)="
+              changeCurveGraphData(
+                'Acquisition',
+                'NobucChan',
+                '',
+                '',
+                [
+                  { TopofMind: topofmindselect.value },
+                  { PerformanceMarketing: pmkt.value },
+                  { Incentives: incen.value }
+                ],
+                'all'
+              )
+            "
+            >Acquisitions</a
+          >
+          <a
+            #clickOrderTab
+            id="OrderTabOpti"
+            class="point"
+            onclick="OrderCLickOptimizer()"
+            (click)="
+              changeCurveGraphData(
+                'Order',
+                'NobucChan',
+                '',
+                '',
+                [
+                  { TopofMind: topofmindselect.value },
+                  { PerformanceMarketing: pmkt.value },
+                  { Incentives: incen.value }
+                ],
+                'all'
+              )
+            "
+            >Orders</a
+          >
+        </div> -->
+        
+        <div
+          class="channelSelect bucketChanl"
+          style="
+            width: 800px;
+            text-align: right;
+          "
+        >
+          <!-- code for attribution channels dropdown -->
+          <a
+            #clickBucketTab
+            id="bucTabOpti"
+            class="point selectedToggle"
+            onclick="bucCLickOptimizer()"
+            (click)="
+              changeCurveGraphData(
+                'bucket',
+                'bucChan',
+                '',
+                '',
+                [
+                  { TopofMind: topofmindselect.value },
+                  { PerformanceMarketing: pmkt.value },
+                  { Incentives: incen.value }
+                ],
+                'all'
+              )
+            "
+            >Bucket</a
+          >
+          <a
+            id="chanTabOpti"
+            class="point"
+            onclick="chanCLickOptimizer()"
+            (click)="
+              changeCurveGraphData(
+                'channel',
+                'bucChan',
+                '',
+                '',
+                [
+                  { TopofMind: topofmindselect.value },
+                  { PerformanceMarketing: pmkt.value },
+                  { Incentives: incen.value }
+                ],
+                'all'
+              )
+            "
+            >Channel</a
+          >
+        </div>
+        <!-- curve responsive graph code -->
+        <div class="amchartDiv">
+          <div class="graphText">
+            <h6 class="graphbuck">Mind Metrics</h6>
+            <select
+              [(ngModel)]="topOfMindSelectChannel"
+              #topofmindselect
+              class="selectCHannel"
+              (change)="
+                changeCurveGraphData(
+                  'channel',
+                  'bucChan',
+                  'Top of Mind',
+                  topofmindselect.value,
+                  [],
+                  'topOfMinds'
+                )
+              "
+            >
+              <option value="">Select Channel</option>
+              <option *ngFor="let channel of topChannel" value="{{ channel }}">
+                {{ channel }}
+              </option>
+            </select>
+            <div id="topOfMind" style="width: 100%; height: 400px"></div>
+          </div>
+          <div class="graphText">
+            <h6 class="graphbuck1">Social/Digital</h6>
+            <select
+              [(ngModel)]="performSelectChannel"
+              #pmkt
+              class="selectCHannel"
+              (change)="
+                changeCurveGraphData(
+                  'channel',
+                  'bucChan',
+                  'Performance Marketing',
+                  pmkt.value,
+                  [],
+                  'performanceMarketing'
+                )
+              "
+            >
+              <option value="">Select Channel</option>
+              <option *ngFor="let channel of pMktChannel" value="{{ channel }}">
+                {{ channel }}
+              </option>
+            </select>
+            <div
+              id="performanceMarketing"
+              style="width: 100%; height: 400px"
+            ></div>
+          </div>
+          <div class="graphText">
+            <h6 class="graphbuck">Offers/Promotions</h6>
+            <select
+              [(ngModel)]="incentiveSelectChannel"
+              #incen
+              class="selectCHannel"
+              (change)="
+                changeCurveGraphData(
+                  'channel',
+                  'bucChan',
+                  'Incentives',
+                  incen.value,
+                  [],
+                  'incentive'
+                )
+              "
+            >
+              <option value="">Select Channel</option>
+              <option
+                *ngFor="let channel of incenChannel"
+                value="{{ channel }}"
+              >
+                {{ channel }}
+              </option>
+            </select>
+            <div id="incentives" style="width: 100%; height: 400px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

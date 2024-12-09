@@ -1,0 +1,783 @@
+/*Style sheet to manage styles for different blocks of Business Summary Component */
+.download {
+  margin-left: 84% !important;
+  margin-top: -2% !important;
+  width: 15% !important;
+  color: gray !important;
+}
+li#qoqLi {
+  width: 152px !important;
+}
+li#yoyLi {
+  width: 152px !important;
+}
+.spendCol:nth-child(3) h6 {
+  font-weight: bold;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+#optiText {
+  display: none;
+}
+a#OrderTab {
+  font-size: 15px !important;
+}
+a#OrderTab {
+  font-size: 15px !important;
+}
+li#aquiId {
+  width: 215px !important;
+}
+a#AcquiTab {
+  font-size: 14px !important;
+}
+#spendSpendCol,
+#perSpendCol,
+#spendAcquiCol,
+#perAquiCol,
+#performanceMarketingacqui,
+#topSpendCol,
+#topAquiCol,
+#incenSpendCol,
+#incenAquiCol,
+#performanceMarketingspend,
+#topMindspend,
+#topMindacqui,
+#incentivesspend,
+#topAquiCol,
+#incentivesspend {
+  background: whitesmoke;
+}
+/* CSS Class for Spend Distribution block -Bucket , Performance Marketing */
+.infoArea {
+  padding: 18px 0;
+  display: flex;
+}
+.spendCol {
+  height: auto;
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.spendCol:nth-child(2) {
+  width: 25%;
+}
+/* .spendCol:nth-child(3) {
+  width: 15%;
+} */
+.spendCol h6 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #686868;
+  font-size: 14px;
+}
+.spendCol:first-child h6 {
+  text-align: center;
+  text-indent: 0;
+  font-weight: bold;
+  display: table;
+}
+.spendCol:nth-child(2) h6 {
+  text-align: center;
+  text-indent: 0;
+  color: #34c4e6;
+}
+/* CSS classes to setup layout for spend , cost of orders, acquisitions */
+.graph a {
+  display: block;
+  padding: 13px 0;
+  font-size: 10px;
+  color: #5c5c5c;
+  text-align: center;
+  word-break: break-word;
+  margin-top: 10px;
+}
+.graph a.selected {
+  color: #2bb8a4;
+}
+.spendCol.newCol {
+  justify-content: flex-start;
+}
+.spendCol.newCol:nth-child(2) {
+  margin-top: 7%;
+}
+.spendCol.newCol:nth-child(2) .graph {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+.spendCol.newCol:nth-child(2) .graph a {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+.doubleCol:first-child .infoArea .spendCol:nth-child(2) {
+  justify-content: flex-end;
+  margin-bottom: 38px;
+}
+.doubleCol:first-child .infoArea .spendCol:nth-child(2) .graph {
+  height: 81%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+/* CSS for layout setup of tabs & graph for bucket attribution & QoQ / YoY Comparison */
+#tabs2,
+#tabsbucket {
+  position: relative;
+}
+#tabs2 ul,
+#tabsbucket ul {
+  width: 94%;
+  margin: auto;
+  align-items: center;
+  border-bottom: none;
+}
+#tabs2 ul li,
+#tabsbucket ul li,
+#topTabs ul li {
+  margin: 0;
+  border: solid 1px #b7b7b7;
+  padding: 0;
+  border-radius: 20px 0px 0px 20px;
+  overflow: hidden;
+  text-align: center;
+  width: 187px;
+}
+#topTabs ul li {
+  width: 164px;
+}
+#tabs2 ul li a,
+#tabsbucket ul li a,
+#topTabs ul li a {
+  text-decoration: none;
+  display: block;
+  color: #9e9d9d;
+  font-size: 18px;
+  font-weight: bold;
+  height: 45px;
+  box-sizing: border-box;
+}
+#topTabs ul li a {
+  padding: 9px 0;
+  text-align: center;
+}
+#tabs2 ul li:last-child,
+#tabsbucket ul li:last-child,
+#topTabs ul li:last-child {
+  border-radius: 0px 20px 20px 0px;
+  border-left: 0;
+}
+#tabs2 ul .ui-tabs-active.ui-state-active a::before,
+#tabsbucket ul .ui-tabs-active.ui-state-active a::before {
+  display: none;
+}
+#tabs2 ul .ui-tabs-active.ui-state-active a,
+#tabsbucket ul .ui-tabs-active.ui-state-active a,
+#tabs3 ul .ui-tabs-active.ui-state-active a {
+  background: #dedede;
+}
+#tabs2 ul li a:hover,
+#tabsbucket ul li a:hover,
+#topTabs ul li a:hover {
+  background: #ddeeff;
+  color: #326395;
+}
+#tabs3,
+#tabs3Bucket {
+  height: auto;
+}
+#tabs3 ul,
+#tabs3Bucket ul {
+  margin-top: -87px;
+  width: 64%;
+  right: 0;
+  position: absolute;
+}
+.firstTabsContent {
+  padding: 0px 20px 20px;
+  position: relative;
+}
+.firstTabsContent .columnSections {
+  display: flex;
+  justify-content: space-between;
+}
+.groupColumn {
+  width: 48%;
+  padding: 20px 0;
+  border-radius: 8px;
+  text-align: center;
+  border: solid 1px lightgray;
+  overflow: hidden;
+}
+.panelSection {
+  display: block;
+}
+/* CSS to control the layout of Channel specific data spend, order */
+.channelPanel {
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  height: 450px;
+  margin-bottom: 20px;
+  border: solid 1px lightgray;
+  overflow: hidden;
+}
+.channelPanel:last-child {
+  margin-bottom: 0;
+}
+#tabs2 ul span,
+#tabsbucket ul span,
+#topTabs ul span {
+  color: #67479f;
+  font-weight: 500;
+  margin-right: 15px;
+  font-size: 18px;
+}
+#topOfMindDisplay,
+#tabs-2,
+#incentivesDisplay {
+  display: none;
+}
+.point {
+  cursor: pointer;
+}
+.selectedTab {
+  background: #ddeeff !important;
+  color: #326395 !important;
+}
+.selectedTab a {
+  color: #326395 !important;
+}
+.summyPanels.scenarioDatat {
+  margin-bottom: 0;
+}
+#topTabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+#topTabs ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  padding-bottom: 30px;
+  margin-bottom: 0;
+}
+#topTabs ul span {
+  color: #5c5c5c;
+  font-weight: 500;
+}
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 0px 30px;
+  background: no-repeat #fff;
+  box-shadow: 0 1px 6px #aeaed680;
+  border-radius: 20px;
+  padding: 20px 20px;
+}
+#tabs-1 {
+  position: relative;
+}
+.spendColumns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#topTabs .colorLabel {
+  top: 10px;
+  width: 230px;
+  justify-content: flex-end;
+  right: 5px;
+}
+#topTabs .colorLabel span {
+  margin-left: 30px;
+}
+#topTabs .colorLabel span::before {
+  background: #34c4e6;
+}
+#topTabs .colorLabel span:nth-child(2)::before {
+  background: #d5e4e7;
+}
+#topTabs .colorLabel span:nth-child(3)::before {
+  background: #d5e4e7;
+}
+/* Css to setup colorlabel for performance marketing , topofmind, orders, incentives */
+.colorLabel {
+  width: 412px;
+  display: flex;
+  position: absolute;
+  right: -6px;
+  top: 75px;
+  align-items: center;
+  font-size: 14px;
+}
+.colorLabel span {
+  margin-left: 8%;
+  position: relative;
+}
+.colorLabel span::before {
+  border-radius: 20px;
+  content: "";
+  background: #3cd59d;
+  width: 14px;
+  height: 8px;
+  position: absolute;
+  top: 0;
+  left: -20px;
+  bottom: 0;
+  margin: auto;
+}
+.colorLabel span:nth-child(2)::before {
+  background: #5281cb;
+}
+.colorLabel span:nth-child(3)::before {
+  background: #37bcd5;
+}
+.channelSelect {
+  position: absolute;
+  right: 30px;
+  top: -66px;
+  width: 224px;
+}
+.doubleCol tspan {
+  font-size: 10px;
+}
+svg g rect {
+  width: 100%;
+  border: solid 1px blue;
+}
+svg g tspan {
+  font-size: 10px !important;
+}
+svg g text {
+  font-size: 10px;
+}
+rect {
+  width: 100%;
+}
+.doubleCol .heading {
+  justify-content: space-between;
+  align-items: center;
+}
+.doubleCol .heading span {
+  font-size: 16px;
+  padding-left: 10px;
+  text-align: right;
+  align-self: flex-end;
+  padding-top: 12px;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 13px;
+}
+/* Media query CSS for screen resolution between 1800 & 2600 */
+@media (min-width: 1800px) and (max-width: 2600px) {
+  #topTabs ul span {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  #topTabs ul li a {
+    font-size: 22px;
+  }
+  .spendCol h6 {
+    font-size: 18px;
+  }
+  .spendCol:first-child h6 {
+    text-align: center;
+    text-indent: 0;
+  }
+  .graph a {
+    font-size: 15px;
+  }
+  .groupColumn tspan {
+    font-size: 15px;
+  }
+  .doubleCol .heading span {
+    font-size: 16px;
+  }
+}
+/* Media query CSS for screen resolution between 1650 & 1799 */
+@media (min-width: 1650px) and (max-width: 1799px) {
+  #topTabs ul span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  #topTabs ul li a {
+    font-size: 20px;
+  }
+  .spendCol h6 {
+    font-size: 17px;
+  }
+  .spendCol:first-child h6 {
+    text-align: center;
+    text-indent: 0;
+  }
+  .graph a {
+    font-size: 15px;
+  }
+  .groupColumn tspan {
+    font-size: 15px;
+  }
+  #tabs2 ul span,
+  #tabsbucket ul span,
+  #topTabs ul span {
+    font-size: 20px;
+  }
+  .doubleCol .heading span {
+    font-size: 16px;
+  }
+}
+/* Media query CSS for screen resolution 1199*/
+@media (max-width: 1199px) {
+  span.currency {
+    font-size: 24px;
+  }
+  #tabs2 ul,
+  #tabsbucket ul {
+    width: 100%;
+  }
+  #tabs3 ul,
+  #tabs3Bucket ul {
+    width: 71%;
+  }
+}
+/* Media query CSS for screen resolution 1120*/
+@media (max-width: 1120px) {
+  #tabs3 ul,
+  #tabs3Bucket ul {
+    width: 47%;
+  }
+}
+/* Media query CSS for screen resolution 1024*/
+@media (max-width: 1024px) {
+  .summyPanels {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .sumryCol {
+    width: 31%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+  }
+}
+/* Media query CSS for screen resolution 990*/
+@media (max-width: 990px) {
+  .myContainer {
+    flex-direction: column;
+  }
+  .doubleCol {
+    width: 100%;
+    margin-bottom: 4%;
+  }
+  .spendColumns {
+    flex-direction: column;
+  }
+  #topTabs ul {
+    margin-top: 0;
+  }
+}
+/* Media query CSS for screen resolution 950*/
+@media (max-width: 950px) {
+  #tabs ul {
+    justify-content: center;
+  }
+  #tabs3 ul,
+  #tabs3Bucket ul {
+    margin-top: 0;
+    right: 0;
+    position: relative;
+  }
+  .selecctSection {
+    flex-wrap: wrap;
+  }
+  .selectCol {
+    width: 29%;
+    margin-bottom: 2%;
+    margin-right: 3%;
+  }
+  .scenCol strong {
+    font-size: 17px;
+    text-align: center;
+    display: block;
+  }
+  .rangeBar {
+    width: 85%;
+  }
+  .myContainer {
+    overflow: scroll;
+  }
+  .tableSection {
+    overflow: scroll;
+  }
+  .colorLabel {
+    width: 95%;
+    display: flex;
+    position: relative;
+    right: 0;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  #tabs3Bucket ul {
+    width: 100%;
+  }
+  .channelSelect {
+    position: relative;
+    right: 0;
+    top: 0;
+    width: 224px;
+    margin: auto auto 20px;
+  }
+}
+/* Media query CSS for screen resolution 768*/
+@media (max-width: 768px) {
+  .infoArea {
+    flex-direction: column;
+  }
+  .spendCol,
+  .spendCol:nth-child(2) {
+    width: 100%;
+    padding: 10px 5px;
+    box-sizing: border-box;
+  }
+  .spendCol h6 {
+    text-align: left;
+    text-indent: 35px;
+  }
+  #tabs3 ul {
+    width: 100%;
+  }
+}
+/* Media query CSS for screen resolution 690*/
+@media (max-width: 690px) {
+  #tabs ul li {
+    margin: 0px 4px;
+  }
+  .summyPanels {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .sumryCol {
+    width: 48%;
+    margin-bottom: 4%;
+  }
+  .firstTabsContent .columnSections {
+    flex-direction: column;
+  }
+  .groupColumn {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .summyPanels.scenarioDatat {
+    justify-content: flex-start;
+  }
+  .summyPanels.scenarioDatat .dataCol {
+    width: 49%;
+    margin: 1%;
+  }
+  .optimizer {
+    flex-direction: column;
+  }
+  #tabs ul li {
+    margin: 0px;
+  }
+  .colorLabel span {
+    font-size: 14px;
+    margin-left: 8%;
+  }
+  #tabs ul {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  #tabs ul li {
+    text-align: center;
+  }
+  #tabs ul li a {
+    display: block;
+    padding: 10px 20px;
+  }
+  #tabs ul li a.active1::before {
+    left: 0;
+  }
+  #QoQYoYComparisonspend,
+  #QoQYoYComparisonorder,
+  #QoQYoYComparisonacqui {
+    width: 200%;
+  }
+  .selectCol {
+    width: 100%;
+  }
+  .spendCol h6 {
+    font-size: 16px;
+  }
+  .spendCol:first-child h6 {
+    text-align: center;
+    text-indent: 0px;
+  }
+  .graph a {
+    font-size: 15px;
+  }
+  .doubleCol .heading {
+    font-size: 16px;
+  }
+  .doubleCol.heading span {
+    font-size: 15px;
+  }
+}
+/* Media query CSS for screen resolution 480*/
+@media (max-width: 480px) {
+  .summyPanels {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .sumryCol {
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .selecctSection {
+    display: flex;
+    flex-direction: column;
+  }
+  .selectCol {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .summyPanels.scenarioDatat .dataCol {
+    width: 100%;
+    margin: 0 0 1%;
+  }
+  .colorLabel span {
+    line-height: normal;
+  }
+  .colorLabel span::before {
+    width: 8px;
+    height: 8px;
+    left: -17px;
+  }
+  #topTabs ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  #topTabs ul span {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  #topTabs ul li a {
+    padding: 12px;
+    font-size: 16px;
+  }
+  .infoArea {
+    padding: 10px;
+  }
+  #tabs ul {
+    padding: 10px;
+  }
+  #tabs ul li {
+    text-align: center;
+  }
+  #tabs ul li a {
+    display: block;
+  }
+  #tabs ul li a.active1::before {
+    left: 0;
+  }
+  #tabs2 ul li a {
+    padding: 12px;
+    font-size: 16px;
+  }
+  #tabsbucket ul li a {
+    padding: 11px 8px;
+    font-size: 16px;
+  }
+  #topTabs ul li {
+    width: 133px;
+  }
+}
+/* Media query CSS for screen resolution 420*/
+@media (max-width: 420px) {
+  .topContainer {
+    padding: 20px 10px;
+  }
+}
+#tabs ul li a.active1 {
+  position: relative;
+}
+#tabs ul li a.active1::before {
+  content: "";
+  border-radius: 5px;
+  background: transparent linear-gradient(270deg, #a958c7 0%, #478ad8 100%) 0%
+    0% no-repeat padding-box;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  height: 4px;
+  position: absolute;
+  bottom: -12px;
+}
+.graph a.point.graphchange {
+  color: #28b1a6;
+}
+.graph a.point.incentivegraphchange {
+  color: #37bcd5;
+}
+.graph a.point.tpgraphchange {
+  color: #5281cb;
+}
+#dropdownSpecific {
+  display: none;
+}
+#buckgrahChannel {
+  display: none;
+}
+.doubleCol .infoArea .spendCol:nth-last-child svg {
+  margin-left: -122px;
+}

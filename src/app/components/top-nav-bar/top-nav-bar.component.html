@@ -1,0 +1,25 @@
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-expand-xl navbar-light">
+  <div onclick="mobMenu()" class="responsive">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+  </div>
+  <div class="logo">
+    <a><img src="assets/eClerx-Digital-Logo-New.png" alt="" /></a>
+  </div>
+  <div id="navbarCollapse" class="justify-content-start">
+    <div class="navbar-nav ml-auto">
+      <div class="nav-item dropdown">
+        <a data-toggle="dropdown" class="nav-link dropdown-toggle user-action"
+          ><img src="assets/user.png" class="avatar" alt="Avatar" />{{ userName
+          }}<b class="caret"></b
+        ></a>
+        <div class="dropdown-menu">
+          <!-- For logout -->
+          <a class="dropdown-item" (click)="logout()"
+            ><i class="material-icons" (click)="logout()"></i> Logout</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

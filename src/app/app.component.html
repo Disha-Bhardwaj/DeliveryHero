@@ -1,0 +1,20 @@
+<!-- Spinner Show-->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="default"
+  color="#fff"
+  type="square-spin"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+
+<!-- Top Nav Bar -->
+<app-top-nav-bar *ngIf="shouldShow()"></app-top-nav-bar>
+
+<ng-flash-message></ng-flash-message>
+<div class="wrapper">
+  <!-- code for left navigation part -->
+  <app-left-panel *ngIf="shouldShow()"></app-left-panel>
+  <!-- Navigation display -->
+  <router-outlet></router-outlet>
+</div>
